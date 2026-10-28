@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Beranda | {{ profil.nama_desa|default:"Profil Desa" }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <span class="eyebrow">WEBSITE RESMI DESA</span>
+    <h1>Mengenal Desa,<br><em>Membangun Bersama.</em></h1>
+    <p>Temukan informasi profil, kabar terbaru, kegiatan, dan potensi desa kami dalam satu tempat.</p>
+    <div class="hero-actions"><a class="btn btn-primary" href="{% url 'profil' %}">Jelajahi Profil <span>↗</span></a><a class="btn btn-outline" href="{% url 'daftar_berita' %}">Lihat Berita</a></div>
+    <div class="hero-note"><span class="note-dot"></span> Terbuka, informatif, dan dekat dengan masyarakat</div>
+  </div>
+  <div class="hero-badge"><span>🌿</span><div><strong>Desa yang Bertumbuh</strong><small>Bersama masyarakat</small></div></div>
+</section>
+<section class="stats-strip">
+  <div class="container stats-grid">
+    <div><span class="stat-icon">⌂</span><div><strong>Profil Desa</strong><small>Kenali sejarah dan wilayah</small></div></div>
+    <div><span class="stat-icon">▤</span><div><strong>Informasi Terkini</strong><small>Berita dan pengumuman</small></div></div>
+    <div><span class="stat-icon">♧</span><div><strong>Potensi Lokal</strong><small>Budaya dan unggulan desa</small></div></div>
+  </div>
+</section>
+<section class="section container about-section">
+  <div class="section-image"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85" alt="Pemandangan alam pedesaan"><span class="image-caption">Desa kita, rumah kita.</span></div>
+  <div class="section-copy"><span class="eyebrow green">SAMBUTAN & PROFIL</span><h2>Desa yang maju berawal dari <em>kebersamaan.</em></h2>
+    <p>{{ profil.sambutan|default:"Selamat datang di website profil desa kami. Website ini menjadi ruang informasi bagi masyarakat untuk mengenal desa, mengikuti kegiatan, dan mendapatkan kabar terbaru."|truncatewords:45 }}</p>
+    <a class="text-link" href="{% url 'profil' %}">Selengkapnya tentang desa <span>→</span></a>
+    <div class="signature"><span class="signature-line"></span><div><strong>Pemerintah Desa</strong><small>{{ profil.nama_desa|default:"Desa Sejahtera" }}</small></div></div>
+  </div>
+</section>
+<section class="section section-soft">
+ <div class="container">
+  <div class="section-heading"><div><span class="eyebrow green">KABAR DESA</span><h2>Berita & informasi <em>terbaru.</em></h2></div><a class="text-link" href="{% url 'daftar_berita' %}">Semua berita →</a></div>
+  <div class="card-grid">
+   {% for item in berita_terbaru %}
+   <article class="content-card">
+    {% if item.gambar %}<img class="card-image" src="{{ item.gambar.url }}" alt="{{ item.judul }}">{% else %}<div class="card-placeholder">DESA <span>✳</span></div>{% endif %}
+    <div class="card-body"><span class="card-date">{{ item.tanggal_publikasi|date:"d M Y" }}</span><h3>{{ item.judul }}</h3><p>{{ item.ringkasan|default:item.isi|truncatewords:18 }}</p><a class="text-link" href="{% url 'detail_berita' item.pk %}">Baca selengkapnya →</a></div>
+   </article>
+   {% empty %}
+   <div class="empty-state"><span>▤</span><h3>Belum ada berita</h3><p>Tambahkan berita melalui halaman admin Django agar tampil di sini.</p></div>
+   {% endfor %}
+  </div>
+ </div>
+</section>
+<section class="section container activities-section">
+ <div class="section-heading"><div><span class="eyebrow green">AKTIVITAS WARGA</span><h2>Kegiatan <em>desa.</em></h2></div><a class="text-link" href="{% url 'daftar_kegiatan' %}">Lihat semua kegiatan →</a></div>
+ <div class="activity-list">
+ {% for item in kegiatan_terbaru %}
+  <article class="activity-item"><div class="activity-date"><strong>{{ item.tanggal|date:"d"|default:"—" }}</strong><span>{{ item.tanggal|date:"M Y"|default:"Kegiatan" }}</span></div><div class="activity-copy"><h3>{{ item.nama }}</h3><p>{{ item.deskripsi|truncatewords:22 }}</p></div><span class="activity-arrow">↗</span></article>
+ {% empty %}<p class="muted">Belum ada kegiatan yang ditambahkan. Kelola melalui admin Django.</p>{% endfor %}
+ </div>
+</section>
+<section class="cta-section"><div class="container cta-inner"><div><span class="eyebrow">PUNYA PERTANYAAN?</span><h2>Mari terhubung dengan <em>kami.</em></h2><p>Hubungi pemerintah desa untuk informasi lebih lanjut.</p></div><a class="btn btn-light" href="{% url 'kontak' %}">Hubungi Desa <span>→</span></a></div></section>
+{% endblock %}

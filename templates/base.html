@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Website resmi profil desa, berita, kegiatan, dan informasi pelayanan masyarakat.">
+    <title>{% block title %}Profil Desa{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="{% url 'beranda' %}">
+      <span class="brand-mark">D</span>
+      <span><strong>{{ profil.nama_desa|default:"Desa Sejahtera" }}</strong><small>Website Profil Desa</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="{% url 'beranda' %}">Beranda</a>
+      <a href="{% url 'profil' %}">Profil Desa</a>
+      <a href="{% url 'daftar_berita' %}">Berita</a>
+      <a href="{% url 'daftar_kegiatan' %}">Kegiatan</a>
+      <a class="nav-contact" href="{% url 'kontak' %}">Kontak</a>
+    </nav>
+  </div>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><a class="brand footer-brand" href="{% url 'beranda' %}"><span class="brand-mark">D</span><span><strong>{{ profil.nama_desa|default:"Desa Sejahtera" }}</strong><small>Informasi desa dalam satu tempat</small></span></a><p>Website informasi desa untuk mendukung keterbukaan informasi dan pelayanan masyarakat.</p></div>
+    <div><h4>Navigasi</h4><a href="{% url 'profil' %}">Profil Desa</a><a href="{% url 'daftar_berita' %}">Berita</a><a href="{% url 'daftar_kegiatan' %}">Kegiatan</a></div>
+    <div><h4>Hubungi Kami</h4><p>{{ profil.alamat|default:"Alamat kantor desa dapat ditambahkan melalui admin." }}</p><p>{{ profil.telepon|default:"Kontak desa belum diisi" }}</p></div>
+  </div>
+  <div class="copyright">© {% now "Y" %} {{ profil.nama_desa|default:"Desa Sejahtera" }}. Website Profil Desa.</div>
+</footer>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

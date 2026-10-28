@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}{{ berita.judul }}{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><a class="text-link" href="{% url 'daftar_berita' %}">← Kembali ke berita</a><p class="card-date">{{ berita.tanggal_publikasi|date:"d F Y" }}</p><h1>{{ berita.judul }}</h1></div></section>
+<article class="container article-content">{% if berita.gambar %}<img class="article-image" src="{{ berita.gambar.url }}" alt="{{ berita.judul }}">{% endif %}<p class="article-summary">{{ berita.ringkasan }}</p>{{ berita.isi|linebreaks }}</article>
+{% endblock %}

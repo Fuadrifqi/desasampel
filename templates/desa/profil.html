@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Profil Desa{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow green">TENTANG KAMI</span><h1>Profil <em>Desa.</em></h1><p>Mengenal sejarah, visi, misi, dan identitas desa kami.</p></div></section>
+<section class="section container detail-layout"><div class="detail-main"><h2>Selamat datang di {{ profil.nama_desa|default:"Desa Sejahtera" }}</h2><p>{{ profil.sambutan|default:"Halaman profil desa dapat diperbarui melalui panel admin."|linebreaks }}</p><h2>Sejarah Desa</h2><p>{{ profil.sejarah|default:"Informasi sejarah desa belum ditambahkan."|linebreaks }}</p><h2>Visi</h2><p>{{ profil.visi|default:"Visi desa belum ditambahkan."|linebreaks }}</p><h2>Misi</h2><p>{{ profil.misi|default:"Misi desa belum ditambahkan."|linebreaks }}</p></div><aside class="info-panel"><span class="eyebrow green">IDENTITAS DESA</span><h3>{{ profil.nama_desa|default:"Desa Sejahtera" }}</h3><p><strong>Kecamatan</strong><br>{{ profil.kecamatan|default:"Belum diisi" }}</p><p><strong>Kabupaten</strong><br>{{ profil.kabupaten|default:"Belum diisi" }}</p><p><strong>Alamat kantor</strong><br>{{ profil.alamat|default:"Belum diisi" }}</p></aside></section>
+{% endblock %}

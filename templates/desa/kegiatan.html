@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Kegiatan Desa{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow green">AKTIVITAS MASYARAKAT</span><h1>Kegiatan <em>Desa.</em></h1><p>Dokumentasi kegiatan dan kebersamaan warga.</p></div></section>
+<section class="section container"><div class="activity-list">
+{% for item in kegiatan_list %}<article class="activity-item">{% if item.gambar %}<img class="activity-thumb" src="{{ item.gambar.url }}" alt="{{ item.nama }}">{% endif %}<div class="activity-date"><strong>{{ item.tanggal|date:"d"|default:"—" }}</strong><span>{{ item.tanggal|date:"M Y"|default:"Kegiatan" }}</span></div><div class="activity-copy"><h3>{{ item.nama }}</h3><p>{{ item.deskripsi|default:"Informasi kegiatan desa." }}</p></div></article>
+{% empty %}<div class="empty-state"><span>♧</span><h3>Belum ada kegiatan</h3><p>Tambahkan kegiatan melalui panel admin Django.</p></div>{% endfor %}
+</div></section>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Kontak Desa{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow green">HUBUNGI KAMI</span><h1>Kontak <em>Desa.</em></h1><p>Kami siap membantu masyarakat mendapatkan informasi.</p></div></section>
+<section class="section container contact-grid"><div><span class="eyebrow green">PEMERINTAH DESA</span><h2>Terhubung dengan <em>kami.</em></h2><p>Silakan gunakan informasi di bawah ini untuk menghubungi kantor desa. Data dapat diperbarui melalui panel admin.</p></div><div class="contact-card"><div class="contact-row"><span>⌖</span><div><strong>Alamat kantor</strong><p>{{ profil.alamat|default:"Alamat belum ditambahkan." }}</p></div></div><div class="contact-row"><span>☎</span><div><strong>Telepon</strong><p>{{ profil.telepon|default:"Nomor telepon belum ditambahkan." }}</p></div></div><div class="contact-row"><span>✉</span><div><strong>Email</strong><p>{{ profil.email|default:"Email belum ditambahkan." }}</p></div></div></div></section>
+{% endblock %}
